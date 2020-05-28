@@ -1,0 +1,13 @@
+<?php
+header("Content-type: text/plain");
+$is_bot = preg_match('/robot|bot|spider|crawler|curl^$/i', $_SERVER['HTTP_USER_AGENT']);
+if ($is_bot) {
+?>
+User-Agent: *
+Disallow: /webconsole/
+
+<?php
+} else {
+echo '<h1>Nothing to see here!</h1>';
+}
+?>
