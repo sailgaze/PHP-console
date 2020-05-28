@@ -6,9 +6,6 @@ http://localhost/index.php
 
 This script will run your PHP snippets and show generated output.
 
-WARNING: Do not upload it into your live Web Server! If hacker or even kiddie will get hold of it - he can destroy everything at your hosting account.
-Use it only on your local web space available only to you.
-
 License: free
 
 Created by Gleb Esman, gleb@memberwing.com
