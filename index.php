@@ -38,6 +38,21 @@
 		$ip_adr = $_SERVER["REMOTE_ADDR"]; } 
 	return $ip_adr;
 	}
+// Filter blacklisted dangerous function
+    function sanitize_blacklist($input) {
+// Hopefully! sanitizes all ;) exec/cmd functions
+    $dangerous_functions = [
+       'exec', 'shell_exec', 'system', 'popen', 'proc_open', 'pcntl_exec',
+        'eval', 'assert', 'create_function', 'include', 'include_once'
+    ];
+
+    foreach ($dangerous_functions as $function) {
+        $pattern = sprintf('/\b%s\s*\(/i', preg_quote($function, '/'));
+        $input = preg_replace($pattern, '', $input);
+    }
+
+    return $input;
+}
     $client_ip = ip_adr();
     echo '<h2>Your IP is '.$client_ip.'</h2>';
     if ($client_ip == $WHITELIST_IP) {
@@ -52,9 +67,9 @@
 		{
 		if (get_magic_quotes_gpc()) 
 		   $_POST['php_input'] = stripslashes($_POST['php_input']); 
-		
+
 		ob_start();
-		eval($_POST['php_input']);
+		eval(sanitize_blacklist($_POST['php_input']));
 		$php_output = ob_get_contents();
 		ob_end_clean();
 
