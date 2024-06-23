@@ -30,6 +30,7 @@
 
 <body>
 <?php
+//WHITELIST IP
     $WHITELIST_IP = '127.0.0.1'; 
     function ip_adr() { 
 	if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) { 
